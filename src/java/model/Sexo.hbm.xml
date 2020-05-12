@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/05/2018 01:49:19 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Sexo" table="sexo" catalog="Proagencia" optimistic-lock="version">
+        <id name="idSexo" type="string">
+            <column name="idSexo" length="9" />
+            <generator class="assigned" />
+        </id>
+        <set name="clientes" table="cliente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idSexo" length="9" />
+            </key>
+            <one-to-many class="model.Cliente" />
+        </set>
+        <set name="proveedors" table="proveedor" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idSexo" length="9" />
+            </key>
+            <one-to-many class="model.Proveedor" />
+        </set>
+        <set name="vendedors" table="vendedor" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idSexo" length="9" />
+            </key>
+            <one-to-many class="model.Vendedor" />
+        </set>
+    </class>
+</hibernate-mapping>

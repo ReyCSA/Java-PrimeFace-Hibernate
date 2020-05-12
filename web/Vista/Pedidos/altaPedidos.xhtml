@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+        <ui:composition template="./../../Plantilla/Plantilla.xhtml">
+            <ui:define name="Cuerpo">
+                
+                <h:form id="formInsertar" >
+                    <center>
+                        <p:panel header="Ingresa los Pedidos">
+                            <p:panelGrid id="grid" columns="2" >                        
+
+                                <h:outputLabel for="idProveedor" value="Proveedor:" style="font-weight:bold"/>                    
+                                <p:selectOneMenu value="#{pedidosBean.pedido.proveedor.idProveedor}">
+                                    <f:selectItems value="#{pedidosBean.listaProveedor}" />
+                                    <p:message for="idProveedor" />
+                                </p:selectOneMenu>
+                                <h:outputText value="#{pedidosBean.pedido.proveedor.idProveedor}" />
+                                <p style="font-size: 2px"/>
+
+                                <h:outputLabel for="idTipo" value="Tipo de Auto:" style="font-weight:bold"/>                    
+                                <p:selectOneMenu value="#{pedidosBean.pedido.tipoAuto.idTipo}">
+                                    <f:selectItems value="#{pedidosBean.listaTipo}" />
+                                    <p:message for="idTipo" />
+                                </p:selectOneMenu>
+                                <h:outputText value="#{pedidosBean.pedido.tipoAuto.idTipo}" />
+                                <p style="font-size: 2px"/>
+
+                                <h:outputLabel for="marca" value="Marca:" style="font-weight: bold"/>                    
+                                <p:inputText id="marca" value="#{pedidosBean.pedido.marca}" required="true" label="marca"/>
+                                <p:message for="marca" />
+                                <h:outputText value="#{pedidosBean.pedido.marca}" />
+
+                                <h:outputLabel for="modelo" value="Modelo:" style="font-weight:bold"/>                    
+                                <p:inputText id="modelo" value="#{pedidosBean.pedido.modelo}" required="true" label="modelo">
+                                    <p:clientValidator event="keyup"/>
+                                </p:inputText>
+                                <p:message for="modelo" />
+                                <h:outputText value="#{pedidosBean.pedido.modelo}" />
+
+                                <h:outputLabel for="preciouni" value="Precio Unitario:" style="font-weight:bold"/>                    
+                                <p:inputText id="preciouni" value="#{pedidosBean.pedido.preciouni}">
+                                    <f:validateDoubleRange minimum="1.0" maximum="999999.0" />
+                                </p:inputText>
+                                <p:message for="preciouni" />
+                                <h:outputText value="#{pedidosBean.pedido.preciouni}" />
+
+                                <h:outputLabel for="cantidad" value="Cantidad:" style="font-weight:bold"/>                    
+                                <p:inputText id="cantidad" value="#{pedidosBean.pedido.cantidad}">
+                                    <f:validateDoubleRange minimum="1" maximum="999" />
+                                </p:inputText>
+                                <p:message for="cantidad" />
+                                <h:outputText value="#{pedidosBean.pedido.cantidad}" />                                                
+
+                                <h:outputLabel for="iva" value="IVA:" style="font-weight:bold"/>                    
+                                <p:inputText id="iva" value="#{pedidosBean.pedido.iva}">
+                                    <f:validateDoubleRange minimum="1.0" maximum="999999.0" />
+                                </p:inputText>
+                                <p:message for="iva" />
+                                <h:outputText value="#{pedidosBean.pedido.iva}" />
+
+                                <h:outputLabel for="totalPre" value="Total a Pagar:" style="font-weight:bold"/>                    
+                                <p:inputText id="totalPre" value="#{pedidosBean.pedido.totalPre}">
+                                    <f:validateDoubleRange minimum="1.0" maximum="999999.0" />
+                                </p:inputText>
+                                <p:message for="totalPre" />
+                                <h:outputText value="#{pedidosBean.pedido.totalPre}" /> 
+
+                                <h:outputLabel for="color" value="Color:" style="font-weight: bold"/>                    
+                                <p:inputText id="color" value="#{pedidosBean.pedido.color}" required="true" label="color"/>
+                                <p:message for="color" />
+                                <h:outputText value="#{pedidosBean.pedido.color}" />
+
+                                <p:outputLabel for="fechaEla" value="Fecha de Elaboracion: " style="font-weight:bold"/>
+                                <p:calendar id="fechaEla" value="#{pedidosBean.pedido.fechaEla}" effect="fold"/>
+
+                                <p:outputLabel for="fechaEnt" value="Fecha de Entrega: " style="font-weight:bold"/>
+                                <p:calendar id="fechaEnt" value="#{pedidosBean.pedido.fechaEnt}" effect="fold"/>
+
+                                <h:outputLabel for="descripcion" value="Descripcion:" style="font-weight:bold"/>                    
+                                <p:inputText id="descripcion" value="#{pedidosBean.pedido.descripcion}" required="true" label="descripcion" />
+                                <p:message for="descripcion" />
+                                <h:outputText value="#{pedidosBean.pedido.descripcion}" />
+
+                            </p:panelGrid>
+                            <p:growl id="growl" life="1000" />
+                            <p:commandButton value="Agregar" id="agregar" update="growl" actionListener="#{pedidosBean.insertar()}" styleClass="ui-priority-primary" />
+                        </p:panel>
+                    </center>
+                    <p:messages autoUpdate="false"/>
+                </h:form>
+                
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

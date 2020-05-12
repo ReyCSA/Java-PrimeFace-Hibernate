@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/05/2018 01:49:19 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Cliente" table="cliente" catalog="Proagencia" optimistic-lock="version">
+        <id name="idCliente" type="java.lang.Integer">
+            <column name="idCliente" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="sexo" class="model.Sexo" fetch="select">
+            <column name="idSexo" length="9" />
+        </many-to-one>
+        <many-to-one name="tipoCliente" class="model.TipoCliente" fetch="select">
+            <column name="idTipoCte" length="11" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="45" />
+        </property>
+        <property name="apaterno" type="string">
+            <column name="apaterno" length="45" />
+        </property>
+        <property name="amaterno" type="string">
+            <column name="amaterno" length="45" />
+        </property>
+        <property name="fechaNac" type="date">
+            <column name="fechaNac" length="10" />
+        </property>
+        <property name="edad" type="java.lang.Integer">
+            <column name="edad" />
+        </property>
+        <property name="empresa" type="string">
+            <column name="empresa" length="45" />
+        </property>
+        <property name="rfc" type="string">
+            <column name="rfc" length="13" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="15" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="45" />
+        </property>
+        <set name="ventas" table="venta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idCliente" />
+            </key>
+            <one-to-many class="model.Venta" />
+        </set>
+    </class>
+</hibernate-mapping>

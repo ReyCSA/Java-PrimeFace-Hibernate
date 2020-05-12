@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/05/2018 01:49:19 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Auto" table="auto" catalog="Proagencia" optimistic-lock="version">
+        <id name="idAuto" type="java.lang.Integer">
+            <column name="idAuto" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="proveedor" class="model.Proveedor" fetch="select">
+            <column name="idProveedor" />
+        </many-to-one>
+        <many-to-one name="tipoAuto" class="model.TipoAuto" fetch="select">
+            <column name="idTipo" length="12" />
+        </many-to-one>
+        <property name="marca" type="string">
+            <column name="marca" length="30" />
+        </property>
+        <property name="modelo" type="java.lang.Integer">
+            <column name="modelo" />
+        </property>
+        <property name="cantidad" type="java.lang.Byte">
+            <column name="cantidad" />
+        </property>
+        <property name="precio" type="java.lang.Double">
+            <column name="precio" precision="22" scale="0" />
+        </property>
+        <property name="color" type="string">
+            <column name="color" length="15" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="40" />
+        </property>
+        <set name="ventas" table="venta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idAuto" />
+            </key>
+            <one-to-many class="model.Venta" />
+        </set>
+    </class>
+</hibernate-mapping>

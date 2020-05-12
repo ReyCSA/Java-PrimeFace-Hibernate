@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/05/2018 01:49:19 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Pedidos" table="pedidos" catalog="Proagencia" optimistic-lock="version">
+        <id name="idPedido" type="java.lang.Integer">
+            <column name="idPedido" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="proveedor" class="model.Proveedor" fetch="select">
+            <column name="idProveedor" />
+        </many-to-one>
+        <many-to-one name="tipoAuto" class="model.TipoAuto" fetch="select">
+            <column name="idTipo" length="12" />
+        </many-to-one>
+        <property name="marca" type="string">
+            <column name="marca" length="30" />
+        </property>
+        <property name="modelo" type="java.lang.Integer">
+            <column name="modelo" />
+        </property>
+        <property name="preciouni" type="java.lang.Double">
+            <column name="preciouni" precision="22" scale="0" />
+        </property>
+        <property name="cantidad" type="java.lang.Byte">
+            <column name="cantidad" />
+        </property>
+        <property name="iva" type="java.lang.Double">
+            <column name="iva" precision="22" scale="0" />
+        </property>
+        <property name="totalPre" type="java.lang.Double">
+            <column name="totalPre" precision="22" scale="0" />
+        </property>
+        <property name="color" type="string">
+            <column name="color" length="15" />
+        </property>
+        <property name="fechaEla" type="date">
+            <column name="fechaEla" length="10" />
+        </property>
+        <property name="fechaEnt" type="date">
+            <column name="fechaEnt" length="10" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="40" />
+        </property>
+    </class>
+</hibernate-mapping>

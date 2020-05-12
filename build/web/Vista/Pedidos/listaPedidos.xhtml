@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+        <ui:composition template="./../../Plantilla/Plantilla.xhtml">
+            <ui:define name="Cuerpo">
+                
+                <h:form id="formMostrar">
+                    <center>
+                        <p:panel header="Lista de Pedidos">
+                            <p:dataTable var="lis" value="#{pedidosBean.pedidos}"
+                                         emptyMessage="No se encontraron Registros :(" 
+                                         paginator="true" rows="10" paginatorPosition="top" 
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} 
+                                         {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+                                         rowsPerPageTemplate="10"
+                                         widgetVar="tablaBuscar"
+                                         filteredValue="#{pedidosBean.pedidosFiltrados}"> 
+
+                                <f:facet name="header">
+                                    <p:outputPanel>
+                                        <p:inputText id="globalFilter" onkeyup="PF('tablaBuscar').filter()" style="width: 150px" placeholder="Buscar"/>
+                                    </p:outputPanel>
+                                </f:facet>
+                                <p:separator/>
+
+                                <p:column headerText="IDPedido" filterBy="#{lis.idPedido}" filterStyle="80px" filterMatchMode="contains">
+                                    <h:outputLabel value="#{lis.idPedido}" />
+                                </p:column>
+
+                                <p:column headerText="IDProveedor" filterBy="#{lis.proveedor.idProveedor}" filterStyle="100px" filterMatchMode="contains">
+                                    <h:outputText value="#{lis.proveedor.idProveedor}" />
+                                </p:column>
+
+                                <p:column headerText="Tipo" filterBy="#{lis.tipoAuto.idTipo}" filterStyle="100px" filterMatchMode="contains">
+                                    <h:outputText value="#{lis.tipoAuto.idTipo}" />
+                                </p:column>
+
+                                <p:column headerText="Marca" filterBy="#{lis.marca}" filterStyle="100px" filterMatchMode="contains">
+                                    <h:outputText value="#{lis.marca}" />
+                                </p:column>
+
+                                <p:column headerText="Modelo" filterBy="#{lis.modelo}" filterStyle="100px" filterMatchMode="contains">
+                                    <h:outputText value="#{lis.modelo}" />
+                                </p:column>
+
+                                <p:column headerText="Precio" filterBy="#{lis.preciouni}" filterStyle="100px" filterMatchMode="contains">
+                                    <h:outputText value="#{lis.preciouni}" />
+                                </p:column>
+
+                                <p:column headerText="Cantidad" filterBy="#{lis.cantidad}" filterStyle="100px" filterMatchMode="contains">
+                                    <h:outputText value="#{lis.cantidad}" />
+                                </p:column>  
+
+                                <p:column headerText="IVA" filterBy="#{lis.iva}" filterStyle="100px" filterMatchMode="contains">
+                                    <h:outputText value="#{lis.iva}" />
+                                </p:column>  
+
+                                <p:column headerText="Total" filterBy="#{lis.totalPre}" filterStyle="100px" filterMatchMode="contains">
+                                    <h:outputText value="#{lis.totalPre}" />
+                                </p:column>  
+
+                                <p:column headerText="Color" filterBy="#{lis.color}" filterStyle="100px" filterMatchMode="contains">
+                                    <h:outputText value="#{lis.color}" />
+                                </p:column>
+
+                                <p:column headerText="FechaEla" filterBy="#{lis.fechaEla}" filterStyle="100px" filterMatchMode="contains">
+                                    <h:outputText value="#{lis.fechaEla}" />
+                                </p:column>
+
+                                <p:column headerText="FechaEnt" filterBy="#{lis.fechaEnt}" filterStyle="100px" filterMatchMode="contains">
+                                    <h:outputText value="#{lis.fechaEnt}" />
+                                </p:column>
+
+                                <p:column headerText="Descripcion" filterBy="#{lis.descripcion}" filterStyle="100px" filterMatchMode="contains">
+                                    <h:outputText value="#{lis.descripcion}" />
+                                </p:column>
+
+                                <!--Botones-->
+                                <p:column headerText="Editar">
+                                    <p:commandButton value="Editar" onclick="PF('dlgmodificar').show();" update=":formModificar">
+                                        <f:setPropertyActionListener target="#{pedidosBean.pedido}" value="#{lis}"/>
+                                    </p:commandButton>
+                                </p:column>
+
+                                <p:column headerText="Eliminar">
+                                    <p:commandButton value="Eliminar" onclick="PF('dlgeliminar').show();">
+                                        <f:setPropertyActionListener target="#{pedidosBean.pedido}" value="#{lis}"/>
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>
+                        </p:panel>
+                    </center>
+                </h:form>
+
+                <p:dialog id="dlg" header="Modificar Pedido"
+                          showEffect="explode" hideEffect="bounce"
+                          widgetVar="dlgmodificar" modal="true"
+                          resizable="false" minWidth="200">
+                    <h:form id="formModificar" >
+                        <p:panelGrid id="grid" columns="2" >                        
+
+                            <h:outputLabel value="Proveedor:" style="font-weight:bold"/>                    
+                            <p:selectOneMenu value="#{pedidosBean.pedido.proveedor.idProveedor}">
+                                <f:selectItems value="#{pedidosBean.listaProveedor}" />
+                            </p:selectOneMenu>
+
+                            <h:outputLabel value="Tipo de Auto:" style="font-weight:bold"/>                    
+                            <p:selectOneMenu value="#{pedidosBean.pedido.tipoAuto.idTipo}">
+                                <f:selectItems value="#{pedidosBean.listaTipo}" />
+                            </p:selectOneMenu>
+
+                            <h:outputLabel value="Marca:" style="font-weight: bold"/>                    
+                            <p:inputText value="#{pedidosBean.pedido.marca}" />
+
+                            <h:outputLabel value="Modelo:" style="font-weight:bold"/>                    
+                            <p:inputText value="#{pedidosBean.pedido.modelo}" />
+
+                            <h:outputLabel value="Precio Unitario:" style="font-weight:bold"/>                    
+                            <p:inputText value="#{pedidosBean.pedido.preciouni}" />
+
+                            <h:outputLabel value="Cantidad:" style="font-weight:bold"/>                    
+                            <p:inputText value="#{pedidosBean.pedido.cantidad}" />                                                
+
+                            <h:outputLabel value="IVA:" style="font-weight:bold"/>                    
+                            <p:inputText id="iva" value="#{pedidosBean.pedido.iva}" />
+
+                            <h:outputLabel value="Total a Pagar:" style="font-weight:bold"/>                    
+                            <p:inputText value="#{pedidosBean.pedido.totalPre}" /> 
+
+                            <h:outputLabel value="Color:" style="font-weight: bold"/>                    
+                            <p:inputText value="#{pedidosBean.pedido.color}" />
+
+                            <p:outputLabel value="Fecha de Elaboracion: " style="font-weight:bold"/>
+                            <p:calendar value="#{pedidosBean.pedido.fechaEla}" effect="fold"/>
+
+                            <p:outputLabel value="Fecha de Entrega: " style="font-weight:bold"/>
+                            <p:calendar value="#{pedidosBean.pedido.fechaEnt}" effect="fold"/>
+
+                            <h:outputLabel value="Descripcion:" style="font-weight:bold"/>                    
+                            <p:inputText value="#{pedidosBean.pedido.descripcion}" />
+
+                        </p:panelGrid>
+                        <p:commandButton value="Modificar" id="modificar" actionListener="#{pedidosBean.actualiza()}" styleClass="ui-priority-primary" update=":formMostrar"
+                                         onclick="PF('dlgmodificar').hide();"/>
+                    </h:form>  
+                </p:dialog>
+
+                <p:dialog id="dlg2" header="Eliminar Pedido" 
+                          showEffect="explode" hideEffect="bounce"
+                          widgetVar="dlgeliminar" modal="true" 
+                          resizable="false" minWidth="200">
+                    <h:form id="formEliminar">
+
+                        <p:outputLabel value="¿Desea eliminar el registro?" />
+
+                        <p:commandButton 
+                            actionListener="#{pedidosBean.elimina()}" 
+                            value="Si" onclick="PF('dlgeliminar').hide();"
+                            update=":formMostrar"/>
+                        <p:commandButton  value="No" 
+                                          onclick="PF('dlg2').hide();"/>
+                    </h:form>
+
+                </p:dialog>
+                
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

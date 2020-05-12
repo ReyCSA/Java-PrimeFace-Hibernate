@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../Plantilla/Plantilla.xhtml">
+            <ui:define name="Cuerpo">
+                
+                <h:form id="formInsertar" >
+                    <center>
+                        <p:panel header="Ingresa los datos de Vendedor">
+                            <p:panelGrid id="grid" columns="2" >                        
+
+                                <h:outputLabel for="nombre" value="Nombre:" style="font-weight: bold"/>                    
+                                <p:inputText id="nombre" value="#{vendedorBean.vendedor.nombre}" required="true" label="nombre"/>
+                                <p:message for="nombre" />
+                                <h:outputText value="#{vendedorBean.vendedor.nombre}" />
+
+                                <h:outputLabel for="apaterno" value="Paterno:" style="font-weight:bold"/>                    
+                                <p:inputText id="apaterno" value="#{vendedorBean.vendedor.apaterno}" required="true" label="apaterno"/>
+                                <p:message for="apaterno" />
+                                <h:outputText value="#{vendedorBean.vendedor.apaterno}" />
+
+                                <h:outputLabel for="amaterno" value="Materno:" style="font-weight:bold"/>                    
+                                <p:inputText id="amaterno" value="#{vendedorBean.vendedor.amaterno}" required="true" label="amaterno"/>
+                                <p:message for="amaterno" />
+                                <h:outputText value="#{vendedorBean.vendedor.amaterno}" />
+
+                                <h:outputLabel for="idSexo" value="Sexo:" style="font-weight:bold"/>                    
+                                <p:selectOneMenu value="#{vendedorBean.vendedor.sexo.idSexo}">
+                                    <f:selectItems value="#{vendedorBean.listaSexo}" />
+                                    <p:message for="idSexo" />
+                                </p:selectOneMenu>
+                                <h:outputText value="#{vendedorBean.vendedor.sexo.idSexo}" />
+                                <p style="font-size: 2px"/>
+
+                                <p:outputLabel for="fechaNac" value="Fecha de Nacimiento: " style="font-weight:bold"/>
+                                <p:calendar id="fechaNac" value="#{vendedorBean.vendedor.fechaNac}" effect="fold"/>
+
+                                <h:outputLabel for="edad" value="Edad:" style="font-weight:bold"/>                    
+                                <p:inputText id="edad" value="#{vendedorBean.vendedor.edad}" required="true" label="edad">
+                                    <p:clientValidator event="keyup"/>
+                                </p:inputText>
+                                <p:message for="edad" />
+                                <h:outputText value="#{vendedorBean.vendedor.edad}" />
+
+                                <h:outputLabel for="rfc" value="RFC:" style="font-weight:bold"/>                    
+                                <p:inputText id="rfc" value="#{vendedorBean.vendedor.rfc}" required="true" label="rfc">
+                                    <f:validateLength minimum="13" maximum="13" />
+                                </p:inputText>
+                                <p:message for="rfc" />
+                                <h:outputText value="#{vendedorBean.vendedor.rfc}" />
+
+                                <h:outputLabel for="telefono" value="Telefono:" style="font-weight:bold"/>                    
+                                <p:inputText id="telefono" value="#{vendedorBean.vendedor.telefono}" required="true" label="telefono"/>
+                                <p:message for="telefono" />
+                                <h:outputText value="#{vendedorBean.vendedor.telefono}" />
+
+                                <h:outputLabel for="email" value="Email:" style="font-weight:bold"/>                    
+                                <p:inputText id="email" value="#{vendedorBean.vendedor.email}" required="true" label="email"/>
+                                <p:message for="email" />
+                                <h:outputText value="#{vendedorBean.vendedor.email}" />
+
+                            </p:panelGrid>
+                            <p:growl id="growl" life="1000" />
+                            <p:commandButton value="Agregar" id="agregar" update="growl" actionListener="#{vendedorBean.insertar()}" styleClass="ui-priority-primary" />
+                        </p:panel>
+                    </center>
+                    <p:messages autoUpdate="false"/>
+                </h:form>
+                
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

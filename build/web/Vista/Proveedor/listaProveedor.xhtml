@@ -1,0 +1,173 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+        <ui:composition template="./../../Plantilla/Plantilla.xhtml">
+            <ui:define name="Cuerpo">
+                
+                <h:form id="formMostrar">
+                    <center>
+                        <p:panel header="Lista de Proveedores">
+                            <p:dataTable var="lis" value="#{proveedorBean.proveedores}"
+                                         emptyMessage="No se encontraron Registros :(" 
+                                         paginator="true" rows="10" paginatorPosition="top" 
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} 
+                                         {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+                                         rowsPerPageTemplate="10"
+                                         widgetVar="tablaBuscar"
+                                         filteredValue="#{proveedorBean.proveedorFiltrados}"> 
+
+                                <f:facet name="header">
+                                    <p:outputPanel>
+                                        <p:inputText id="globalFilter" onkeyup="PF('tablaBuscar').filter()" style="width: 150px" placeholder="Buscar"/>
+                                    </p:outputPanel>
+                                </f:facet>
+                                <p:separator/>
+
+                                <p:column headerText="IDProveedor" filterBy="#{lis.idProveedor}" filterStyle="80px" filterMatchMode="contains">
+                                    <h:outputLabel value="#{lis.idProveedor}" />
+                                </p:column>
+
+                                <p:column headerText="Nombre" filterBy="#{lis.nombre}" filterStyle="100px" filterMatchMode="contains">
+                                    <h:outputText value="#{lis.nombre}" />
+                                </p:column>
+
+                                <p:column headerText="Paterno" filterBy="#{lis.apaterno}" filterStyle="100px" filterMatchMode="contains">
+                                    <h:outputText value="#{lis.apaterno}" />
+                                </p:column>
+
+                                <p:column headerText="Materno" filterBy="#{lis.amaterno}" filterStyle="100px" filterMatchMode="contains">
+                                    <h:outputText value="#{lis.amaterno}" />
+                                </p:column>
+
+                                <p:column headerText="Sexo" filterBy="#{lis.sexo.idSexo}" filterStyle="100px" filterMatchMode="contains">
+                                    <h:outputText value="#{lis.sexo.idSexo}" />
+                                </p:column>
+
+                                <p:column headerText="RFC Proveedor" filterBy="#{lis.rfc}" filterStyle="100px" filterMatchMode="contains">
+                                    <h:outputText value="#{lis.rfc}" />
+                                </p:column>
+
+                                <p:column headerText="Telefono Proveedor" filterBy="#{lis.telProveedor}" filterStyle="100px" filterMatchMode="contains">
+                                    <h:outputText value="#{lis.telProveedor}" />
+                                </p:column>
+
+                                <p:column headerText="Email Proveedor" filterBy="#{lis.emailPro}" filterStyle="100px" filterMatchMode="contains">
+                                    <h:outputText value="#{lis.emailPro}" />
+                                </p:column>
+
+                                <p:column headerText="Nombre Empresa" filterBy="#{lis.empresa}" filterStyle="100px" filterMatchMode="contains">
+                                    <h:outputText value="#{lis.empresa}" />
+                                </p:column>
+
+                                <p:column headerText="RFC Empresa" filterBy="#{lis.rfc}" filterStyle="100px" filterMatchMode="contains">
+                                    <h:outputText value="#{lis.rfc}" />
+                                </p:column>
+
+                                <p:column headerText="Direccion Empresa" filterBy="#{lis.dirEmpresa}" filterStyle="100px" filterMatchMode="contains">
+                                    <h:outputText value="#{lis.dirEmpresa}" />
+                                </p:column>
+
+                                <p:column headerText="Telefono Empresa" filterBy="#{lis.telEmpresa}" filterStyle="100px" filterMatchMode="contains">
+                                    <h:outputText value="#{lis.telProveedor}" />
+                                </p:column>
+
+                                <p:column headerText="Email Empresa" filterBy="#{lis.emailEmp}" filterStyle="100px" filterMatchMode="contains">
+                                    <h:outputText value="#{lis.emailEmp}" />
+                                </p:column>
+
+                                <!--Botones-->
+                                <p:column headerText="Editar">
+                                    <p:commandButton value="Editar" onclick="PF('dlgmodificar').show();" update=":formModificar">
+                                        <f:setPropertyActionListener target="#{proveedorBean.proveedor}" value="#{lis}"/>
+                                    </p:commandButton>
+                                </p:column>
+
+                                <p:column headerText="Eliminar">
+                                    <p:commandButton value="Eliminar" onclick="PF('dlgeliminar').show();">
+                                        <f:setPropertyActionListener target="#{proveedorBean.proveedor}" value="#{lis}"/>
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>
+                        </p:panel>
+                    </center>
+                </h:form>
+
+                <p:dialog id="dlg" header="Modificar Proveedores"
+                          showEffect="explode" hideEffect="bounce"
+                          widgetVar="dlgmodificar" modal="true"
+                          resizable="false" minWidth="200">
+                    <h:form id="formModificar" >
+                        <p:panelGrid id="grid" columns="2" >                        
+
+                            <h:outputLabel value="Nombre:" style="font-weight: bold"/>                    
+                            <p:inputText value="#{proveedorBean.proveedor.nombre}" />
+
+                            <h:outputLabel value="Paterno:" style="font-weight:bold"/>                    
+                            <p:inputText value="#{proveedorBean.proveedor.apaterno}" />
+
+                            <h:outputLabel value="Materno:" style="font-weight:bold"/>                    
+                            <p:inputText value="#{proveedorBean.proveedor.amaterno}" />
+
+                            <h:outputLabel value="Sexo:" style="font-weight:bold"/>                    
+                            <p:selectOneMenu value="#{proveedorBean.proveedor.sexo.idSexo}">
+                                <f:selectItems value="#{proveedorBean.listaSexo}" />
+                            </p:selectOneMenu>
+
+                            <h:outputLabel value="RFC del Proveedor:" style="font-weight:bold"/>                    
+                            <p:inputText value="#{proveedorBean.proveedor.rfc}" />
+
+                            <h:outputLabel value="Telefono del Proveedor:" style="font-weight:bold"/>                    
+                            <p:inputText value="#{proveedorBean.proveedor.telProveedor}" />
+
+                            <h:outputLabel value="Email del Proveedor:" style="font-weight:bold"/>                    
+                            <p:inputText value="#{proveedorBean.proveedor.emailPro}"/>                       
+
+                            <h:outputLabel value="Nombre de la Empresa:" style="font-weight:bold"/>                    
+                            <p:inputText value="#{proveedorBean.proveedor.empresa}" />
+
+                            <h:outputLabel value="RFC de la Empresa:" style="font-weight:bold"/>                    
+                            <p:inputText value="#{proveedorBean.proveedor.rfcEmpresa}" />
+
+                            <h:outputLabel value="Direccion de la Empresa:" style="font-weight:bold"/>                    
+                            <p:inputText value="#{proveedorBean.proveedor.dirEmpresa}" />
+
+                            <h:outputLabel value="Telefono de la Empresa:" style="font-weight:bold"/>                    
+                            <p:inputText value="#{proveedorBean.proveedor.telEmpresa}"/>
+
+                            <h:outputLabel value="Email de la Empresa:" style="font-weight:bold"/>                    
+                            <p:inputText value="#{proveedorBean.proveedor.emailEmp}"/>
+
+                        </p:panelGrid>
+                        <p:commandButton value="Modificar" id="modificar" actionListener="#{proveedorBean.actualiza()}" styleClass="ui-priority-primary" update=":formMostrar"
+                                         onclick="PF('dlgmodificar').hide();"/>
+                    </h:form>  
+                </p:dialog>
+
+                <p:dialog id="dlg2" header="Eliminar Proveedor" 
+                          showEffect="explode" hideEffect="bounce"
+                          widgetVar="dlgeliminar" modal="true" 
+                          resizable="false" minWidth="200">
+                    <h:form id="formEliminar">
+
+                        <p:outputLabel value="¿Desea eliminar el registro?" />
+
+                        <p:commandButton 
+                            actionListener="#{proveedorBean.elimina()}" 
+                            value="Si" onclick="PF('dlgeliminar').hide();"
+                            update=":formMostrar"/>
+                        <p:commandButton  value="No" 
+                                          onclick="PF('dlg2').hide();"/>
+                    </h:form>
+
+                </p:dialog>
+                
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

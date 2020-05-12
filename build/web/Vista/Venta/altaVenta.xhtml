@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+        <ui:composition template="./../../Plantilla/Plantilla.xhtml">
+            <ui:define name="Cuerpo">
+                
+                <h:form id="formInsertar" >
+                    <center>
+                        <p:panel header="Ingresa la Venta">
+                            <p:panelGrid id="grid" columns="2" >                        
+
+                                 <h:outputLabel for="idVendedor" value="Vendedor:" style="font-weight:bold"/>                    
+                                <p:selectOneMenu value="#{ventaBean.venta.vendedor.idVendedor}">
+                                    <f:selectItems value="#{ventaBean.listaVendedor}" />
+                                    <p:message for="idVendedor" />
+                                </p:selectOneMenu>
+                                <h:outputText value="#{ventaBean.venta.vendedor.idVendedor}" />
+                                <p style="font-size: 2px"/>
+                                
+                                <h:outputLabel for="idCliente" value="Cliente:" style="font-weight:bold"/>                    
+                                <p:selectOneMenu value="#{ventaBean.venta.cliente.idCliente}">
+                                    <f:selectItems value="#{ventaBean.listaCliente}" />
+                                    <p:message for="idCliente" />
+                                </p:selectOneMenu>
+                                <h:outputText value="#{ventaBean.venta.cliente.idCliente}" />
+                                <p style="font-size: 2px"/>
+                                
+                                <h:outputLabel for="idAuto" value="Auto:" style="font-weight:bold"/>                    
+                                <p:selectOneMenu value="#{ventaBean.venta.auto.idAuto}">
+                                    <f:selectItems value="#{ventaBean.listaAuto}" />
+                                    <p:message for="idAuto" />
+                                </p:selectOneMenu>
+                                <h:outputText value="#{ventaBean.venta.auto.idAuto}" />
+                                <p style="font-size: 2px"/>
+                                
+                                <p:outputLabel for="fecha" value="Fecha de Compra: " style="font-weight:bold"/>
+                                <p:calendar id="fecha" value="#{ventaBean.venta.fecha}" effect="fold"/>
+
+                                <h:outputLabel for="preciouni" value="Precio Unitario:" style="font-weight:bold"/>                    
+                                <p:inputText id="preciouni" value="#{ventaBean.venta.preciouni}">
+                                    <f:validateDoubleRange minimum="1.0" maximum="999999.0" />
+                                </p:inputText>
+                                <p:message for="preciouni" />
+                                <h:outputText value="#{ventaBean.venta.preciouni}" />
+
+                                <h:outputLabel for="cantidad" value="Cantidad:" style="font-weight:bold"/>                    
+                                <p:inputText id="cantidad" value="#{ventaBean.venta.cantidad}">
+                                    <f:validateDoubleRange minimum="1" maximum="999" />
+                                </p:inputText>
+                                <p:message for="cantidad" />
+                                <h:outputText value="#{ventaBean.venta.cantidad}" />                                                
+
+                                <h:outputLabel for="iva" value="IVA:" style="font-weight:bold"/>                    
+                                <p:inputText id="iva" value="#{ventaBean.venta.iva}">
+                                    <f:validateDoubleRange minimum="1.0" maximum="999999.0" />
+                                </p:inputText>
+                                <p:message for="iva" />
+                                <h:outputText value="#{ventaBean.venta.iva}" />
+
+                                <h:outputLabel for="descuento" value="Descuento:" style="font-weight:bold"/>                    
+                                <p:inputText id="descuento" value="#{ventaBean.venta.descuento}">
+                                    <f:validateDoubleRange minimum="1.0" maximum="999999.0" />
+                                </p:inputText>
+                                <p:message for="descuento" />
+                                <h:outputText value="#{ventaBean.venta.descuento}" />
+
+                                <h:outputLabel for="total" value="Total a Pagar:" style="font-weight:bold"/>                    
+                                <p:inputText id="total" value="#{ventaBean.venta.total}">
+                                    <f:validateDoubleRange minimum="1.0" maximum="999999.0" />
+                                </p:inputText>
+                                <p:message for="total" />
+                                <h:outputText value="#{ventaBean.venta.total}" /> 
+
+                                <h:outputLabel for="descripcion" value="Descripcion:" style="font-weight:bold"/>                    
+                                <p:inputText id="descripcion" value="#{ventaBean.venta.decripcion}" required="true" label="descripcion" />
+                                <p:message for="descripcion" />
+                                <h:outputText value="#{ventaBean.venta.decripcion}" />
+
+                            </p:panelGrid>
+                            <p:growl id="growl" life="1000" />
+                            <p:commandButton value="Agregar" id="agregar" update="growl" actionListener="#{ventaBean.insertar()}" styleClass="ui-priority-primary" />
+                        </p:panel>
+                    </center>
+                    <p:messages autoUpdate="false"/>
+                </h:form>
+                
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

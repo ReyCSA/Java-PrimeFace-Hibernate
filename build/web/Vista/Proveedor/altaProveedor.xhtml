@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+        <ui:composition template="./../../Plantilla/Plantilla.xhtml">
+            <ui:define name="Cuerpo">
+                
+                <h:form id="formInsertar" >
+                    <center>
+                        <p:panel header="Ingresa los datos del Proveedor">
+                            <p:panelGrid id="grid" columns="2" >                        
+
+                                <h:outputLabel for="nombre" value="Nombre:" style="font-weight: bold"/>                    
+                                <p:inputText id="nombre" value="#{proveedorBean.proveedor.nombre}" required="true" label="nombre"/>
+                                <p:message for="nombre" />
+                                <h:outputText value="#{proveedorBean.proveedor.nombre}" />
+
+                                <h:outputLabel for="apaterno" value="Paterno:" style="font-weight:bold"/>                    
+                                <p:inputText id="apaterno" value="#{proveedorBean.proveedor.apaterno}" required="true" label="apaterno"/>
+                                <p:message for="apaterno" />
+                                <h:outputText value="#{proveedorBean.proveedor.apaterno}" />
+
+                                <h:outputLabel for="amaterno" value="Materno:" style="font-weight:bold"/>                    
+                                <p:inputText id="amaterno" value="#{proveedorBean.proveedor.amaterno}" required="true" label="amaterno"/>
+                                <p:message for="amaterno" />
+                                <h:outputText value="#{proveedorBean.proveedor.amaterno}" />
+
+                                <h:outputLabel for="idSexo" value="Sexo:" style="font-weight:bold"/>                    
+                                <p:selectOneMenu value="#{proveedorBean.proveedor.sexo.idSexo}">
+                                    <f:selectItems value="#{proveedorBean.listaSexo}" />
+                                    <p:message for="idSexo" />
+                                </p:selectOneMenu>
+                                <h:outputText value="#{proveedorBean.proveedor.sexo.idSexo}" />
+                                <p style="font-size: 2px"/>
+
+                                <h:outputLabel for="rfc" value="RFC del Proveedor:" style="font-weight:bold"/>                    
+                                <p:inputText id="rfc" value="#{proveedorBean.proveedor.rfc}" required="true" label="rfc">
+                                    <f:validateLength minimum="13" maximum="13" />
+                                </p:inputText>
+                                <p:message for="rfc" />
+                                <h:outputText value="#{proveedorBean.proveedor.rfc}" />
+
+                                <h:outputLabel for="telProveedor" value="Telefono del Proveedor:" style="font-weight:bold"/>                    
+                                <p:inputText id="telProveedor" value="#{proveedorBean.proveedor.telProveedor}" required="true" label="telProveedor"/>
+                                <p:message for="telProveedor" />
+                                <h:outputText value="#{proveedorBean.proveedor.telProveedor}" />
+
+                                <h:outputLabel for="emailPro" value="Email del Proveedor:" style="font-weight:bold"/>                    
+                                <p:inputText id="emailPro" value="#{proveedorBean.proveedor.emailPro}" required="true" label="emailPro"/>
+                                <p:message for="emailPro" />
+                                <h:outputText value="#{proveedorBean.proveedor.emailPro}" />                       
+
+                                <h:outputLabel for="empresa" value="Nombre de la Empresa:" style="font-weight:bold"/>                    
+                                <p:inputText id="empresa" value="#{proveedorBean.proveedor.empresa}" required="true" label="empresa"/>
+                                <p:message for="empresa" />
+                                <h:outputText value="#{proveedorBean.proveedor.empresa}" />
+
+                                <h:outputLabel for="rfcEmpresa" value="RFC de la Empresa:" style="font-weight:bold"/>                    
+                                <p:inputText id="rfcEmpresa" value="#{proveedorBean.proveedor.rfcEmpresa}" required="true" label="rfcEmpresa">
+                                    <f:validateLength minimum="13" maximum="13" />
+                                </p:inputText>
+                                <p:message for="rfcEmpresa" />
+                                <h:outputText value="#{proveedorBean.proveedor.rfcEmpresa}" />
+
+                                <h:outputLabel for="dirEmpresa" value="Direccion de la Empresa:" style="font-weight:bold"/>                    
+                                <p:inputText id="dirEmpresa" value="#{proveedorBean.proveedor.dirEmpresa}" required="true" label="dirEmpresa">
+                                    <f:validateLength minimum="1" maximum="100" />
+                                </p:inputText>
+                                <p:message for="dirEmpresa" />
+                                <h:outputText value="#{proveedorBean.proveedor.dirEmpresa}" />
+
+                                <h:outputLabel for="telEmpresa" value="Telefono de la Empresa:" style="font-weight:bold"/>                    
+                                <p:inputText id="telEmpresa" value="#{proveedorBean.proveedor.telEmpresa}" required="true" label="telEmpresa"/>
+                                <p:message for="telEmpresa" />
+                                <h:outputText value="#{proveedorBean.proveedor.telEmpresa}" />
+
+                                <h:outputLabel for="emailEmp" value="Email de la Empresa:" style="font-weight:bold"/>                    
+                                <p:inputText id="emailEmp" value="#{proveedorBean.proveedor.emailEmp}" required="true" label="emailEmp"/>
+                                <p:message for="emailEmp" />
+                                <h:outputText value="#{proveedorBean.proveedor.emailEmp}" />
+
+                            </p:panelGrid>
+                            <p:growl id="growl" life="1000" />
+                            <p:commandButton value="Agregar" id="agregar" update="growl" actionListener="#{proveedorBean.insertar()}" styleClass="ui-priority-primary" />
+                        </p:panel>
+                    </center>
+                    <p:messages autoUpdate="false"/>
+                </h:form>
+                
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
